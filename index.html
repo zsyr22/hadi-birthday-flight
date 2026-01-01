@@ -40,42 +40,44 @@
         }
 
         .wrap {
-            width: min(980px, 100%);
+            width: min(1200px, 100%);
             display: grid;
-            gap: 16px;
-            grid-template-columns: 1.15fr .85fr;
+            gap: 18px;
+            grid-template-columns: 1.25fr 1fr;
+            /* الكبير أول (يسار) */
+            align-items: start;
         }
 
-        @media (max-width:860px) {
+        @media (max-width: 980px) {
             .wrap {
                 grid-template-columns: 1fr;
             }
         }
 
         .card {
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 22px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 24px;
             box-shadow: var(--shadow);
             overflow: hidden;
             position: relative;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .topbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, .10);
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, .12);
         }
 
         .brand {
             display: flex;
             gap: 10px;
             align-items: center;
-            font-weight: 800;
-            letter-spacing: .5px;
+            font-weight: 900;
+            letter-spacing: .4px;
         }
 
         .dot {
@@ -88,13 +90,14 @@
 
         .pill {
             font-size: 12px;
-            padding: 8px 10px;
+            padding: 8px 12px;
             border-radius: 999px;
             background: rgba(43, 124, 255, .18);
             border: 1px solid rgba(43, 124, 255, .35);
             color: #dbe9ff;
             user-select: none;
             cursor: pointer;
+            font-weight: 900;
         }
 
         /* Boarding pass */
@@ -104,7 +107,7 @@
             border-radius: 18px;
             margin: 16px;
             overflow: hidden;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .22);
         }
 
         .passHead {
@@ -117,17 +120,41 @@
             gap: 12px;
         }
 
+        .passHeadLeft {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .headAvatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, .65);
+            box-shadow: 0 10px 18px rgba(0, 0, 0, .18);
+            background: rgba(255, 255, 255, .25);
+        }
+
         .passHead .title {
             font-size: 18px;
-            font-weight: 900;
+            font-weight: 1000;
+            letter-spacing: .2px;
+            line-height: 1.1;
         }
 
         .tag {
             font-size: 12px;
-            padding: 6px 10px;
+            padding: 7px 10px;
             border-radius: 999px;
             background: rgba(255, 255, 255, .16);
-            border: 1px solid rgba(255, 255, 255, .22);
+            border: 1px solid rgba(255, 255, 255, .24);
+            font-weight: 900;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-weight: 900;
         }
 
         .passBody {
@@ -143,31 +170,75 @@
         }
 
         .field {
-            border: 1px dashed rgba(14, 23, 38, .18);
-            border-radius: 14px;
-            padding: 10px 12px;
-            background: rgba(43, 124, 255, .04);
+            border: 1px dashed rgba(14, 23, 38, .22);
+            border-radius: 16px;
+            padding: 12px 14px;
+            background: rgba(43, 124, 255, .05);
+            min-height: 72px;
         }
 
         .label {
             font-size: 11px;
             color: var(--muted);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            font-weight: 900;
+            opacity: .92;
+            text-align: right;
         }
 
         .value {
             font-size: 15px;
-            font-weight: 800;
+            font-weight: 1000;
+            color: #0b1220;
         }
 
-        .mono {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            font-weight: 800;
+        /* Passenger layout: image MUST be on the RIGHT under Passenger label */
+        /* Passenger: خلّي الصورة + الاسم يبلّشوا من اليمين */
+        .passenger .pRow {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            direction: rtl;
+            /* مهم */
+        }
+
+        .passenger .pInfo {
+            text-align: right;
+            /* اسم الكابتن يمين */
+        }
+
+        .avatar2 {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            object-fit: cover;
+            flex: 0 0 auto;
+        }
+
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(14, 23, 38, .22);
+            box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
+            background: rgba(255, 255, 255, .7);
+            justify-self: end;
+            /* force to the RIGHT */
+        }
+
+        .pSub {
+            margin-top: 4px;
+            font-size: 11px;
+            color: rgba(14, 23, 38, .60);
+            font-weight: 1000;
         }
 
         .divider {
             position: relative;
-            margin: 2px 0 6px;
+            margin: 4px 0 6px;
             height: 18px;
         }
 
@@ -175,7 +246,7 @@
             content: "";
             position: absolute;
             inset: auto 0 8px 0;
-            border-top: 2px dashed rgba(14, 23, 38, .18);
+            border-top: 2px dashed rgba(14, 23, 38, .20);
         }
 
         .notchL,
@@ -184,8 +255,8 @@
             top: 0;
             width: 28px;
             height: 28px;
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .16);
             border-radius: 50%;
             transform: translateY(-6px);
         }
@@ -199,76 +270,51 @@
         }
 
         .footerRow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr 120px;
             gap: 12px;
+            align-items: end;
         }
 
-        /* Passenger row with avatar */
-        .passenger .pRow {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            object-fit: cover;
-            border: 1px solid rgba(14, 23, 38, .18);
-            box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
-            background: rgba(255, 255, 255, .6);
-        }
-
-        .pSub {
-            margin-top: 2px;
-            font-size: 11px;
-            color: rgba(14, 23, 38, .55);
-            font-weight: 900;
-        }
-
-        /* QR mini card */
         .qr {
-            width: 104px;
-            height: 104px;
-            border-radius: 16px;
+            width: 120px;
+            height: 120px;
+            border-radius: 18px;
             border: 1px solid rgba(14, 23, 38, .18);
-            background: rgba(255, 255, 255, .55);
+            background: rgba(255, 255, 255, .65);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            padding: 8px;
+            padding: 10px;
             gap: 6px;
         }
 
         .qrTop {
             display: flex;
-            align-items: center;
             justify-content: space-between;
             gap: 6px;
+            align-items: center;
         }
 
         .qrMini {
             font-size: 10px;
             padding: 4px 6px;
             border-radius: 10px;
-            background: rgba(43, 124, 255, .12);
-            border: 1px solid rgba(43, 124, 255, .18);
-            color: rgba(14, 23, 38, .75);
-            font-weight: 900;
+            background: rgba(43, 124, 255, .14);
+            border: 1px solid rgba(43, 124, 255, .20);
+            color: rgba(14, 23, 38, .78);
+            font-weight: 1000;
         }
 
         .qrBadge {
             font-size: 10px;
-            font-weight: 900;
+            font-weight: 1000;
             letter-spacing: .4px;
             padding: 4px 6px;
             border-radius: 10px;
-            background: rgba(255, 204, 102, .20);
-            border: 1px solid rgba(255, 204, 102, .28);
-            color: rgba(14, 23, 38, .75);
+            background: rgba(255, 204, 102, .22);
+            border: 1px solid rgba(255, 204, 102, .30);
+            color: rgba(14, 23, 38, .78);
         }
 
         .qrGrid {
@@ -292,8 +338,46 @@
 
         .qrSmall {
             font-size: 9px;
-            color: rgba(14, 23, 38, .65);
-            font-weight: 800;
+            color: rgba(14, 23, 38, .70);
+            font-weight: 900;
+        }
+
+        .statusRow {
+            display: grid;
+            gap: 10px;
+        }
+
+        .seatbelt {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: rgba(14, 23, 38, .06);
+            border: 1px solid rgba(14, 23, 38, .14);
+            color: rgba(14, 23, 38, .80);
+            font-weight: 1000;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .sbDot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 71, 87, .45);
+            box-shadow: 0 0 0 rgba(255, 71, 87, 0);
+            transition: .2s ease;
+        }
+
+        .seatbelt.on .sbDot {
+            background: rgba(255, 71, 87, 1);
+            box-shadow: 0 0 14px rgba(255, 71, 87, .55);
+        }
+
+        .seatbelt .sbText {
+            letter-spacing: .6px;
+            font-size: 12px;
         }
 
         .cta {
@@ -304,10 +388,10 @@
             border-radius: 14px;
             background: linear-gradient(135deg, var(--blue), var(--blue2));
             color: white;
-            font-weight: 900;
+            font-weight: 1000;
             font-size: 15px;
             box-shadow: 0 14px 28px rgba(43, 124, 255, .28);
-            transition: transform .12s ease, filter .12s ease;
+            transition: transform .12s ease, filter .12s ease, opacity .12s ease;
         }
 
         .cta:hover {
@@ -332,18 +416,18 @@
         .hint {
             margin: 0;
             color: #d6e4ff;
-            opacity: .9;
+            opacity: .95;
             font-size: 13px;
             line-height: 1.75;
         }
 
         .atcBox {
             margin-top: 14px;
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 18px;
             padding: 14px;
-            min-height: 210px;
+            min-height: 290px;
             position: relative;
             overflow: hidden;
         }
@@ -402,40 +486,44 @@
         .atcTitle {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
-            font-weight: 900;
+            font-weight: 1000;
             margin-bottom: 10px;
+            color: #f3f7ff;
         }
 
         .badge {
             font-size: 12px;
             padding: 6px 10px;
             border-radius: 999px;
-            background: rgba(255, 204, 102, .14);
-            border: 1px solid rgba(255, 204, 102, .28);
+            background: rgba(255, 204, 102, .16);
+            border: 1px solid rgba(255, 204, 102, .30);
             color: #ffe7b7;
+            font-weight: 1000;
         }
 
         #typed {
             white-space: pre-wrap;
-            line-height: 1.8;
+            line-height: 1.85;
             font-size: 14px;
-            color: #eef5ff;
-            opacity: .96;
+            color: #f2f7ff;
+            opacity: .98;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .25);
         }
 
         .subtle {
-            color: rgba(255, 255, 255, .65);
+            color: rgba(255, 255, 255, .72);
             font-size: 12px;
             margin-top: 10px;
         }
 
-        /* A380 plane image animation (slower + bigger) */
+        /* A380 plane image animation */
         .plane {
             position: fixed;
-            left: -30vw;
+            left: -35vw;
             top: 70vh;
-            width: 320px;
+            width: 340px;
             z-index: 9999;
             filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .55));
             transform: rotate(-10deg);
@@ -443,15 +531,13 @@
             opacity: 0;
         }
 
-
         .fly {
-            animation: fly 3.8s cubic-bezier(.25, .85, .25, 1) forwards;
+            animation: fly 4.2s cubic-bezier(.25, .85, .25, 1) forwards;
         }
-
 
         @keyframes fly {
             0% {
-                transform: translateX(-35vw) translateY(8vh) rotate(-12deg) scale(.92);
+                transform: translateX(-40vw) translateY(10vh) rotate(-12deg) scale(.92);
                 opacity: 0;
             }
 
@@ -465,7 +551,7 @@
             }
 
             100% {
-                transform: translateX(140vw) translateY(-40vh) rotate(2deg) scale(1.04);
+                transform: translateX(150vw) translateY(-42vh) rotate(2deg) scale(1.04);
                 opacity: 0;
             }
         }
@@ -501,192 +587,195 @@
             transform: translateX(-50%) translateY(-4px);
         }
 
-        .statusRow {
-            display: grid;
-            gap: 10px;
-        }
-
-        .seatbelt {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
+        /* Status chip (not clickable) */
+        .statusChip {
+            width: 100%;
+            padding: 12px 12px;
             border-radius: 14px;
-            background: rgba(14, 23, 38, .06);
-            border: 1px solid rgba(14, 23, 38, .12);
-            color: rgba(14, 23, 38, .75);
-            font-weight: 900;
-            justify-content: center;
-            user-select: none;
-        }
-
-        .sbDot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 71, 87, .45);
-            box-shadow: 0 0 0 rgba(255, 71, 87, 0);
-            transition: .2s ease;
-        }
-
-        .seatbelt.on .sbDot {
-            background: rgba(255, 71, 87, 1);
-            box-shadow: 0 0 14px rgba(255, 71, 87, .55);
-        }
-
-        .seatbelt .sbText {
+            border: 1px solid rgba(20, 120, 70, .18);
+            background: rgba(20, 120, 70, .08);
+            color: rgba(12, 70, 42, .95);
+            font-weight: 1000;
+            text-align: center;
             letter-spacing: .6px;
+        }
+
+        /* Copy link small feedback */
+        .copied {
+            position: absolute;
+            top: 14px;
+            inset-inline-end: 14px;
+            background: rgba(0, 0, 0, .45);
+            border: 1px solid rgba(255, 255, 255, .18);
+            padding: 8px 10px;
+            border-radius: 12px;
             font-size: 12px;
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: .2s ease;
+            z-index: 5;
+        }
+
+        .copied.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
 <body>
     <canvas id="confetti"></canvas>
-
-    <!-- A380 image (put a380.png next to index.html) -->
     <img src="assets/a380.png" class="plane" id="plane" alt="Airbus A380">
 
     <div class="toast" id="toast">اضغط Start New Flight… وسيصير الإقلاع 🎧</div>
 
     <div class="wrap">
-        <!-- LEFT: boarding pass -->
+        <!-- RIGHT: Boarding Pass -->
         <div class="card">
+            <div class="copied" id="copied">✅ Copied!</div>
+
             <div class="topbar">
                 <div class="brand"><span class="dot"></span> Birthday Flight</div>
-                <div class="pill" id="debugBtn">DEBUG MODE</div>
+                <div class="pill" id="copyBtn">COPY LINK</div>
             </div>
 
             <div class="pass">
-                <img src="assets/hadi.JPG" alt="Hadi" style="
-        width:46px;
-        height:46px;
-        border-radius:50%;
-        object-fit:cover;
-        border:2px solid rgba(255,255,255,.7);
-     ">
-                <div>
-                    <div class="title">BOARDING PASS ✈️</div>
-                    <div style="opacity:.9;font-size:12px;margin-top:2px">A380 Captain Edition</div>
+                <div class="passHead">
+                    <div class="passHeadLeft">
+                        <img class="headAvatar" src="assets/hadi.JPG" alt="Hadi">
+                        <div>
+                            <div class="title">BOARDING PASS ✈️</div>
+                            <div style="opacity:.9;font-size:12px;margin-top:2px;font-weight:900">A380 Captain Edition
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tag mono" id="flightCode">BDAY-2006</div>
                 </div>
-                <div class="tag mono" id="flightCode">BDAY-001</div>
-            </div>
 
-            <div class="passBody">
-                <div class="grid">
-                    <div class="field passenger">
-                        <div class="label">Passenger</div>
-                        <div class="pRow">
-                            <!-- put hadi.jpg next to index.html -->
-                            <img class="avatar" src="assets/hadi2.PNG" alt="Hadi" />
-                            <div>
-                                <div class="value">Captain <span id="name">[اسم أخوك]</span></div>
-                                <div class="pSub mono">Airbus A380</div>
+                <div class="passBody">
+                    <div class="grid">
+
+                        <div class="field passenger">
+                            <div class="label">Passenger</div>
+                            <div class="pRow">
+                                <img class="avatar2" src="assets/hadi2.PNG" alt="Hadi">
+                                <div class="pInfo">
+                                    <div class="value">Captain <span id="name">Hadi</span></div>
+                                    <div class="pSub mono">Airbus A380</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="label">Flight</div>
+                            <div class="value mono" id="flight">DAM → ALTITUDE 20</div>
+                        </div>
+
+                        <div class="field">
+                            <div class="label">From</div>
+                            <div class="value">Past Year</div>
+                        </div>
+
+                        <div class="field">
+                            <div class="label">To</div>
+                            <div class="value">New Adventures</div>
+                        </div>
+
+                        <div class="field">
+                            <div class="label">Gate</div>
+                            <div class="value">Dreams ✨</div>
+                        </div>
+
+                        <div class="field">
+                            <div class="label">Seat</div>
+                            <div class="value">CAPTAIN 🧑‍✈️</div>
+                        </div>
+                    </div>
+
+                    <div class="divider">
+                        <div class="notchL"></div>
+                        <div class="notchR"></div>
+                    </div>
+
+                    <div class="footerRow">
+                        <div style="display:grid; gap:10px;">
+                            <div class="field" style="background:transparent">
+                                <div class="label">Boarding Time</div>
+                                <div class="value mono" id="time">Now</div>
+                            </div>
+
+                            <div class="statusRow">
+                                <div class="seatbelt" id="seatbelt" title="Seatbelt">
+                                    <span class="sbDot"></span>
+                                    <span class="sbText">SEATBELT</span>
+                                </div>
+
+                                <div class="statusChip" id="statusChip" style="display:none;">CLEARED FOR TAKEOFF ✅
+                                </div>
+
+                                <button class="cta" id="startBtn">✈️ Start New Flight</button>
+                                <button class="cta" id="replayBtn" style="display:none; opacity:.95;">🔁 Replay
+                                    Flight</button>
+                            </div>
+                        </div>
+
+                        <div class="qr" aria-label="QR">
+                            <div class="qrTop">
+                                <div class="qrMini mono" id="qrMini">BDAY-2006</div>
+                                <div class="qrBadge">A380</div>
+                            </div>
+                            <div class="qrGrid"></div>
+                            <div class="qrBottom">
+                                <div class="qrSmall">DOB: 01 JAN 2006</div>
+                                <div class="qrSmall">Gate: Dreams</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="field">
-                        <div class="label">Flight</div>
-                        <div class="value mono" id="flight">DXB → SKY</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="label">From</div>
-                        <div class="value">Past Year</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="label">To</div>
-                        <div class="value">New Adventures</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="label">Gate</div>
-                        <div class="value">Dreams ✨</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="label">Seat</div>
-                        <div class="value">CAPTAIN 🧑‍✈️</div>
-                    </div>
                 </div>
-
-                <div class="divider">
-                    <div class="notchL"></div>
-                    <div class="notchR"></div>
-                </div>
-
-                <div class="footerRow">
-                    <div style="flex:1; display:grid; gap:10px;">
-                        <div class="field" style="background:transparent">
-                            <div class="label">Boarding Time</div>
-                            <div class="value mono" id="time">Now</div>
-                        </div>
-
-                        <div class="statusRow">
-                            <div class="seatbelt" id="seatbelt" title="Seatbelt">
-                                <span class="sbDot"></span>
-                                <span class="sbText">SEATBELT</span>
-                            </div>
-                            <button class="cta" id="startBtn">✈️ Start New Flight</button>
-                        </div>
-                    </div>
-
-                    <div class="qr" aria-label="QR">
-                        <div class="qrTop">
-                            <div class="qrMini mono" id="qrMini">BDAY-2006</div>
-                            <div class="qrBadge">A380</div>
-                        </div>
-                        <div class="qrGrid"></div>
-                        <div class="qrBottom">
-                            <div class="qrSmall">DOB: 01 JAN 2006</div>
-                            <div class="qrSmall">Gate: Dreams</div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </div>
-
-    <!-- RIGHT: ATC panel -->
-    <div class="card panel">
-        <h2>🎧 ATC Channel</h2>
-        <p class="hint" id="hint">
-            اضغط <b>Start New Flight</b> لتفعيل الإقلاع (صوت + طيارة + احتفال).
-        </p>
-
-        <div class="atcBox">
-            <div class="scanline"></div>
-            <div class="blip" id="blip"></div>
-
-            <div class="atcTitle">
-                <span class="badge">CLEARANCE</span>
-                <span style="opacity:.95">Tower → Captain</span>
+        <!-- LEFT: ATC -->
+        <div class="card panel">
+            <div class="topbar">
+                <div class="brand"><span class="dot"></span> ATC Channel 🎧</div>
+                <div class="pill" id="debugBtn">DEBUG MODE</div>
             </div>
 
-            <div id="typed">جاهز للإقلاع؟ ✈️</div>
-            <div class="subtle" id="sub">Tip: جرّب اضغط DEBUG MODE 😉</div>
+            <p class="hint" id="hint" style="padding:0 16px 2px;">
+                اضغط <b>Start New Flight</b> لتفعيل الإقلاع .
+            </p>
+
+            <div class="atcBox">
+                <div class="scanline"></div>
+                <div class="blip" id="blip"></div>
+
+                <div class="atcTitle">
+                    <span><span class="badge">CLEARANCE</span> <span style="opacity:.95">Tower → Captain</span></span>
+                    <span style="opacity:.85">🟡</span>
+                </div>
+
+                <div id="typed">جاهز للإقلاع؟ ✈️</div>
+                <div class="subtle" id="sub">Tip: جرّب اضغط DEBUG MODE 😉</div>
+            </div>
         </div>
-    </div>
+
+
+
     </div>
 
     <script>
-        // ====== Personalize here (edit these) ======
+        // ====== Personalize here ======
         const CAPTAIN_NAME = "Hadi";
         const FLIGHT_CODE = "BDAY-2006";
         const ROUTE = "DAM → ALTITUDE 20";
-        const hint = document.getElementById("hint");
-        // ==========================================
+        // =============================
 
         // Set values
-        const qrMini = document.getElementById("qrMini");
-        if (qrMini) qrMini.textContent = FLIGHT_CODE;
-
         document.getElementById("name").textContent = CAPTAIN_NAME;
         document.getElementById("flightCode").textContent = FLIGHT_CODE;
         document.getElementById("flight").textContent = ROUTE;
+        document.getElementById("qrMini").textContent = FLIGHT_CODE;
 
         // Time label
         const now = new Date();
@@ -694,22 +783,41 @@
         const mm = String(now.getMinutes()).padStart(2, "0");
         document.getElementById("time").textContent = `${hh}:${mm}`;
 
+        // Toast
         const toast = document.getElementById("toast");
         setTimeout(() => toast.classList.add("show"), 450);
         setTimeout(() => toast.classList.remove("show"), 3200);
 
-        // --- WebAudio ATC beeps (no external files) ---
+        // Copy link
+        const copyBtn = document.getElementById("copyBtn");
+        const copied = document.getElementById("copied");
+        copyBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(location.href);
+                copied.classList.add("show");
+                setTimeout(() => copied.classList.remove("show"), 1200);
+            } catch (e) {
+                // fallback
+                prompt("Copy this link:", location.href);
+            }
+        });
+
+        // --- Audio (more "realistic" feel, longer) ---
         let audioCtx;
 
-        function beep(freq = 880, duration = 0.08, type = "sine", gain = 0.03) {
+        function ensureAudio() {
             audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === "suspended") audioCtx.resume();
+        }
+
+        function beep(freq = 880, duration = 0.08, type = "sine", gain = 0.03) {
+            ensureAudio();
             const o = audioCtx.createOscillator();
             const g = audioCtx.createGain();
             o.type = type;
             o.frequency.value = freq;
             g.gain.value = gain;
-            o.connect(g);
-            g.connect(audioCtx.destination);
+            o.connect(g); g.connect(audioCtx.destination);
             o.start();
             o.stop(audioCtx.currentTime + duration);
         }
@@ -721,40 +829,24 @@
             setTimeout(() => beep(660, 0.08, "square", 0.018), 270);
         }
 
-        function ensureAudio() {
-            audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-            if (audioCtx.state === "suspended") audioCtx.resume();
-        }
-
-        // Flyby engine sound (WebAudio) — no external files
-        function airplaneFlybySound(totalMs = 2600) {
+        // NOTE: Real recorded engine audio requires an actual audio file (mp3/wav).
+        // This is the best “procedural” engine whoosh we can do without external audio.
+        function airplaneFlybySound(totalMs = 4200) {
             ensureAudio();
 
             const t0 = audioCtx.currentTime;
             const dur = totalMs / 1000;
 
-            // Engine oscillator
-            const osc = audioCtx.createOscillator();
-            osc.type = "sawtooth";
+            const engine = audioCtx.createOscillator();
+            engine.type = "sawtooth";
 
-            // Low rumble layer
             const rumble = audioCtx.createOscillator();
             rumble.type = "sine";
-            rumble.frequency.setValueAtTime(45, t0);
-            rumble.frequency.exponentialRampToValueAtTime(60, t0 + dur * 0.5);
-            rumble.frequency.exponentialRampToValueAtTime(40, t0 + dur);
 
+            const gEngine = audioCtx.createGain();
             const gRumble = audioCtx.createGain();
-            gRumble.gain.setValueAtTime(0.0001, t0);
-            gRumble.gain.exponentialRampToValueAtTime(0.05, t0 + 0.25);
-            gRumble.gain.exponentialRampToValueAtTime(0.07, t0 + dur * 0.5);
-            gRumble.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
 
-            osc.frequency.setValueAtTime(90, t0);
-            osc.frequency.exponentialRampToValueAtTime(140, t0 + dur * 0.45);
-            osc.frequency.exponentialRampToValueAtTime(80, t0 + dur);
-
-            // Noise (wind)
+            // Noise for wind
             const bufferSize = Math.floor(audioCtx.sampleRate * dur);
             const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const data = noiseBuffer.getChannelData(0);
@@ -763,55 +855,66 @@
             const noise = audioCtx.createBufferSource();
             noise.buffer = noiseBuffer;
 
-            // Filters
-            const engineLP = audioCtx.createBiquadFilter();
-            engineLP.type = "lowpass";
-            engineLP.frequency.setValueAtTime(900, t0);
-            engineLP.frequency.exponentialRampToValueAtTime(1400, t0 + dur * 0.5);
-            engineLP.frequency.exponentialRampToValueAtTime(700, t0 + dur);
-
             const noiseBP = audioCtx.createBiquadFilter();
             noiseBP.type = "bandpass";
-            noiseBP.frequency.setValueAtTime(900, t0);
-            noiseBP.Q.value = 0.8;
+            noiseBP.frequency.setValueAtTime(700, t0);
+            noiseBP.Q.value = 0.7;
 
-            // Gain envelopes
-            const gEngine = audioCtx.createGain();
+            const engineLP = audioCtx.createBiquadFilter();
+            engineLP.type = "lowpass";
+            engineLP.frequency.setValueAtTime(700, t0);
+            engineLP.frequency.exponentialRampToValueAtTime(1400, t0 + dur * 0.55);
+            engineLP.frequency.exponentialRampToValueAtTime(650, t0 + dur);
+
+            // Pan (left->right)
+            const pan = audioCtx.createStereoPanner();
+            pan.pan.setValueAtTime(-0.9, t0);
+            pan.pan.linearRampToValueAtTime(0.9, t0 + dur);
+
+            // Frequencies (more “jet” feel)
+            engine.frequency.setValueAtTime(65, t0);
+            engine.frequency.exponentialRampToValueAtTime(120, t0 + dur * 0.55);
+            engine.frequency.exponentialRampToValueAtTime(70, t0 + dur);
+
+            rumble.frequency.setValueAtTime(38, t0);
+            rumble.frequency.exponentialRampToValueAtTime(55, t0 + dur * 0.55);
+            rumble.frequency.exponentialRampToValueAtTime(35, t0 + dur);
+
+            // Gains
             gEngine.gain.setValueAtTime(0.0001, t0);
-            gEngine.gain.exponentialRampToValueAtTime(0.12, t0 + 0.25);
-            gEngine.gain.exponentialRampToValueAtTime(0.18, t0 + dur * 0.5);
+            gEngine.gain.exponentialRampToValueAtTime(0.16, t0 + 0.35);
+            gEngine.gain.exponentialRampToValueAtTime(0.22, t0 + dur * 0.55);
             gEngine.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+            gRumble.gain.setValueAtTime(0.0001, t0);
+            gRumble.gain.exponentialRampToValueAtTime(0.08, t0 + 0.35);
+            gRumble.gain.exponentialRampToValueAtTime(0.11, t0 + dur * 0.55);
+            gRumble.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
 
             const gNoise = audioCtx.createGain();
             gNoise.gain.setValueAtTime(0.0001, t0);
-            gNoise.gain.exponentialRampToValueAtTime(0.06, t0 + 0.2);
-            gNoise.gain.exponentialRampToValueAtTime(0.10, t0 + dur * 0.55);
+            gNoise.gain.exponentialRampToValueAtTime(0.08, t0 + 0.35);
+            gNoise.gain.exponentialRampToValueAtTime(0.12, t0 + dur * 0.60);
             gNoise.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
 
-            // Stereo movement (left -> right)
-            const pan = audioCtx.createStereoPanner();
-            pan.pan.setValueAtTime(-0.8, t0);
-            pan.pan.linearRampToValueAtTime(0.8, t0 + dur);
-
-            // Wire up
-            osc.connect(engineLP).connect(gEngine).connect(pan).connect(audioCtx.destination);
-            noise.connect(noiseBP).connect(gNoise).connect(pan);
+            // Wire
+            engine.connect(engineLP).connect(gEngine).connect(pan).connect(audioCtx.destination);
             rumble.connect(gRumble).connect(pan);
+            noise.connect(noiseBP).connect(gNoise).connect(pan);
 
-            osc.start(t0);
-            noise.start(t0);
+            engine.start(t0);
             rumble.start(t0);
+            noise.start(t0);
 
-            osc.stop(t0 + dur);
-            noise.stop(t0 + dur);
+            engine.stop(t0 + dur);
             rumble.stop(t0 + dur);
+            noise.stop(t0 + dur);
         }
 
         // --- Typing effect ---
         const typed = document.getElementById("typed");
         let typing = false;
-
-        function typeText(text, speed = 16) {
+        function typeText(text, speed = 14) {
             typing = true;
             typed.textContent = "";
             let i = 0;
@@ -824,16 +927,14 @@
             }, speed);
         }
 
-        // --- Confetti (simple particles on canvas) ---
+        // --- Confetti ---
         const canvas = document.getElementById("confetti");
         const ctx = canvas.getContext("2d");
-
         function resizeSafe() {
             canvas.width = window.innerWidth * devicePixelRatio;
             canvas.height = window.innerHeight * devicePixelRatio;
             ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
         }
-
         window.addEventListener("resize", resizeSafe);
         resizeSafe();
 
@@ -842,7 +943,7 @@
 
         function burstConfetti() {
             confetti = [];
-            const count = 150;
+            const count = 160;
             for (let i = 0; i < count; i++) {
                 confetti.push({
                     x: Math.random() * window.innerWidth,
@@ -853,7 +954,7 @@
                     a: Math.random() * Math.PI * 2,
                     va: -0.1 + Math.random() * 0.2,
                     life: 0,
-                    max: 150 + Math.random() * 70
+                    max: 160 + Math.random() * 80
                 });
             }
             animateConfetti();
@@ -865,7 +966,6 @@
 
             function frame() {
                 ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
                 confetti.forEach(p => {
                     p.life++;
                     p.x += p.vx;
@@ -883,20 +983,17 @@
                 });
 
                 confetti = confetti.filter(p => p.life < p.max && p.y < window.innerHeight + 40);
-
                 if (confetti.length) requestAnimationFrame(frame);
                 else {
                     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                     confettiAnimating = false;
                 }
             }
-
             requestAnimationFrame(frame);
         }
 
-        // --- Plane animation trigger ---
+        // --- Plane animation ---
         const plane = document.getElementById("plane");
-
         function flyPlane() {
             plane.classList.remove("fly");
             void plane.offsetWidth;
@@ -906,28 +1003,34 @@
 
         // --- Main action ---
         const startBtn = document.getElementById("startBtn");
+        const replayBtn = document.getElementById("replayBtn");
         const seatbelt = document.getElementById("seatbelt");
         const blip = document.getElementById("blip");
+        const hint = document.getElementById("hint");
+        const statusChip = document.getElementById("statusChip");
         let launched = false;
 
-        startBtn.addEventListener("click", () => {
+        function launch() {
             if (launched) return;
             launched = true;
 
             if (hint) hint.style.display = "none";
-            if (seatbelt) seatbelt.classList.add("on");
+            seatbelt.classList.add("on");
 
-            startBtn.textContent = "✅ Cleared for Takeoff";
-            startBtn.style.opacity = "0.95";
+            // hide Start, show Replay
+            startBtn.style.display = "none";
+            replayBtn.style.display = "block";
 
-            if (blip) {
-                blip.classList.remove("on");
-                void blip.offsetWidth;
-                blip.classList.add("on");
-            }
+            // show status chip (non-button)
+            statusChip.style.display = "block";
+
+            // radar blip
+            blip.classList.remove("on");
+            void blip.offsetWidth;
+            blip.classList.add("on");
 
             radioChatter();
-            airplaneFlybySound();
+            airplaneFlybySound(4600);
             flyPlane();
             burstConfetti();
 
@@ -945,23 +1048,16 @@ Weather: Clear skies ☀️
 Fuel: Passion & Discipline
 Destination: Success & Happiness 🌍
 
-كل عام وإنت بألف خير يا كابتن ❤️
-إن شاء الله كل هبوطك ناعم،
-وكل أحلامك توصلها… رحلة بعد رحلة.`;
+كل عام وإنت بألف خير كابتن ❤️
+إن شاء الله عقبال ما شوفك ارجل كابتن بالعالم كلو ❤️ ،
+وتحقق كل احلامك يارب ❤️.`;
 
             typeText(msg, 14);
-
             setTimeout(() => beep(1200, 0.06, "sine", 0.02), 1200);
+        }
 
-            setTimeout(() => {
-                const reset = document.createElement("button");
-                reset.className = "cta";
-                reset.textContent = "🔁 Replay Flight";
-                reset.style.marginTop = "10px";
-                reset.onclick = () => location.reload();
-                startBtn.parentElement.appendChild(reset);
-            }, 2600);
-        });
+        startBtn.addEventListener("click", launch);
+        replayBtn.addEventListener("click", () => location.reload());
 
         // Easter egg
         const debugBtn = document.getElementById("debugBtn");
@@ -970,9 +1066,7 @@ Destination: Success & Happiness 🌍
             if (!typing) {
                 typeText(
                     `// DEBUG MODE ✅
-if (Captain.smiles) {
-  Tower.reply("A380 skies are yours 😄");
-}
+A380 skies are yours 😄
 
 ملاحظة سرّية:
 أنت مش بس كابتن…
@@ -983,4 +1077,3 @@ if (Captain.smiles) {
 </body>
 
 </html>
-
