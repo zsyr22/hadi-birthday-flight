@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Birthday Flight ✈️</title>
+    <style>
+        :root {
+            --bg1: #0b1020;
+            --bg2: #0a2a43;
+            --bg3: #173b6b;
+            --card: #ffffff;
+            --ink: #0e1726;
+            --muted: #5b677a;
+            --blue: #2b7cff;
+            --blue2: #1659cc;
+            --gold: #ffcc66;
+            --shadow: 0 25px 60px rgba(0, 0, 0, .45);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(1200px 600px at 20% 20%, rgba(43, 124, 255, .25), transparent 60%),
+                radial-gradient(900px 500px at 80% 30%, rgba(255, 204, 102, .18), transparent 60%),
+                linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+            font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+            padding: 18px;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .wrap {
+            width: min(980px, 100%);
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 1.15fr .85fr;
+        }
+
+        @media (max-width:860px) {
+            .wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, .10);
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #ffd98f);
+            box-shadow: 0 0 18px rgba(255, 204, 102, .45);
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(43, 124, 255, .18);
+            border: 1px solid rgba(43, 124, 255, .35);
+            color: #dbe9ff;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        /* Boarding pass */
+        .pass {
+            background: var(--card);
+            color: var(--ink);
+            border-radius: 18px;
+            margin: 16px;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+        }
+
+        .passHead {
+            background: linear-gradient(135deg, var(--blue), var(--blue2));
+            color: white;
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .passHead .title {
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .16);
+            border: 1px solid rgba(255, 255, 255, .22);
+        }
+
+        .passBody {
+            padding: 18px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .field {
+            border: 1px dashed rgba(14, 23, 38, .18);
+            border-radius: 14px;
+            padding: 10px 12px;
+            background: rgba(43, 124, 255, .04);
+        }
+
+        .label {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .value {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-weight: 800;
+        }
+
+        .divider {
+            position: relative;
+            margin: 2px 0 6px;
+            height: 18px;
+        }
+
+        .divider:before {
+            content: "";
+            position: absolute;
+            inset: auto 0 8px 0;
+            border-top: 2px dashed rgba(14, 23, 38, .18);
+        }
+
+        .notchL,
+        .notchR {
+            position: absolute;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 50%;
+            transform: translateY(-6px);
+        }
+
+        .notchL {
+            left: -14px;
+        }
+
+        .notchR {
+            right: -14px;
+        }
+
+        .footerRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        /* Passenger row with avatar */
+        .passenger .pRow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid rgba(14, 23, 38, .18);
+            box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
+            background: rgba(255, 255, 255, .6);
+        }
+
+        .pSub {
+            margin-top: 2px;
+            font-size: 11px;
+            color: rgba(14, 23, 38, .55);
+            font-weight: 900;
+        }
+
+        /* QR mini card */
+        .qr {
+            width: 104px;
+            height: 104px;
+            border-radius: 16px;
+            border: 1px solid rgba(14, 23, 38, .18);
+            background: rgba(255, 255, 255, .55);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 8px;
+            gap: 6px;
+        }
+
+        .qrTop {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        .qrMini {
+            font-size: 10px;
+            padding: 4px 6px;
+            border-radius: 10px;
+            background: rgba(43, 124, 255, .12);
+            border: 1px solid rgba(43, 124, 255, .18);
+            color: rgba(14, 23, 38, .75);
+            font-weight: 900;
+        }
+
+        .qrBadge {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: .4px;
+            padding: 4px 6px;
+            border-radius: 10px;
+            background: rgba(255, 204, 102, .20);
+            border: 1px solid rgba(255, 204, 102, .28);
+            color: rgba(14, 23, 38, .75);
+        }
+
+        .qrGrid {
+            flex: 1;
+            border-radius: 12px;
+            background:
+                radial-gradient(circle at 20% 25%, rgba(14, 23, 38, .55) 0 3px, transparent 4px),
+                radial-gradient(circle at 70% 40%, rgba(14, 23, 38, .45) 0 2px, transparent 3px),
+                radial-gradient(circle at 45% 70%, rgba(14, 23, 38, .50) 0 3px, transparent 4px),
+                linear-gradient(90deg, rgba(14, 23, 38, .10) 1px, transparent 1px) 0 0/8px 8px,
+                linear-gradient(rgba(14, 23, 38, .10) 1px, transparent 1px) 0 0/8px 8px;
+            border: 1px solid rgba(14, 23, 38, .12);
+        }
+
+        .qrBottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+            opacity: .95;
+        }
+
+        .qrSmall {
+            font-size: 9px;
+            color: rgba(14, 23, 38, .65);
+            font-weight: 800;
+        }
+
+        .cta {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--blue), var(--blue2));
+            color: white;
+            font-weight: 900;
+            font-size: 15px;
+            box-shadow: 0 14px 28px rgba(43, 124, 255, .28);
+            transition: transform .12s ease, filter .12s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.03);
+        }
+
+        .cta:active {
+            transform: translateY(1px);
+        }
+
+        /* Right panel */
+        .panel {
+            padding: 16px 16px 18px;
+        }
+
+        .panel h2 {
+            margin: 6px 0 8px;
+            font-size: 18px;
+        }
+
+        .hint {
+            margin: 0;
+            color: #d6e4ff;
+            opacity: .9;
+            font-size: 13px;
+            line-height: 1.75;
+        }
+
+        .atcBox {
+            margin-top: 14px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 16px;
+            padding: 14px;
+            min-height: 210px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scanline {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(to bottom,
+                    rgba(255, 255, 255, .06) 0px,
+                    rgba(255, 255, 255, .06) 1px,
+                    transparent 4px,
+                    transparent 8px);
+            opacity: .22;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .blip {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(43, 124, 255, .95);
+            box-shadow: 0 0 16px rgba(43, 124, 255, .75);
+            top: 18px;
+            left: 18px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .blip.on {
+            animation: blip 0.9s ease-in-out forwards;
+        }
+
+        @keyframes blip {
+            0% {
+                transform: scale(.6);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(.8);
+                opacity: 0;
+            }
+        }
+
+        .atcTitle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 204, 102, .14);
+            border: 1px solid rgba(255, 204, 102, .28);
+            color: #ffe7b7;
+        }
+
+        #typed {
+            white-space: pre-wrap;
+            line-height: 1.8;
+            font-size: 14px;
+            color: #eef5ff;
+            opacity: .96;
+        }
+
+        .subtle {
+            color: rgba(255, 255, 255, .65);
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        /* A380 plane image animation (slower + bigger) */
+        .plane {
+            position: fixed;
+            left: -30vw;
+            top: 70vh;
+            width: 320px;
+            z-index: 9999;
+            filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .55));
+            transform: rotate(-10deg);
+            pointer-events: none;
+            opacity: 0;
+        }
+
+
+        .fly {
+            animation: fly 3.8s cubic-bezier(.25, .85, .25, 1) forwards;
+        }
+
+
+        @keyframes fly {
+            0% {
+                transform: translateX(-35vw) translateY(8vh) rotate(-12deg) scale(.92);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            60% {
+                transform: translateX(55vw) translateY(-18vh) rotate(-6deg) scale(1.00);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(140vw) translateY(-40vh) rotate(2deg) scale(1.04);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti */
+        #confetti {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, .55);
+            border: 1px solid rgba(255, 255, 255, .16);
+            color: white;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity .2s ease, transform .2s ease;
+            z-index: 70;
+            backdrop-filter: blur(10px);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
+        .statusRow {
+            display: grid;
+            gap: 10px;
+        }
+
+        .seatbelt {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: rgba(14, 23, 38, .06);
+            border: 1px solid rgba(14, 23, 38, .12);
+            color: rgba(14, 23, 38, .75);
+            font-weight: 900;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .sbDot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 71, 87, .45);
+            box-shadow: 0 0 0 rgba(255, 71, 87, 0);
+            transition: .2s ease;
+        }
+
+        .seatbelt.on .sbDot {
+            background: rgba(255, 71, 87, 1);
+            box-shadow: 0 0 14px rgba(255, 71, 87, .55);
+        }
+
+        .seatbelt .sbText {
+            letter-spacing: .6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="confetti"></canvas>
+
+    <!-- A380 image (put a380.png next to index.html) -->
+    <img src="assets/a380.png" class="plane" id="plane" alt="Airbus A380">
+
+    <div class="toast" id="toast">اضغط Start New Flight… وسيصير الإقلاع 🎧</div>
+
+    <div class="wrap">
+        <!-- LEFT: boarding pass -->
+        <div class="card">
+            <div class="topbar">
+                <div class="brand"><span class="dot"></span> Birthday Flight</div>
+                <div class="pill" id="debugBtn">DEBUG MODE</div>
+            </div>
+
+            <div class="pass">
+                <img src="assets/hadi.jpg" alt="Hadi" style="
+        width:46px;
+        height:46px;
+        border-radius:50%;
+        object-fit:cover;
+        border:2px solid rgba(255,255,255,.7);
+     ">
+                <div>
+                    <div class="title">BOARDING PASS ✈️</div>
+                    <div style="opacity:.9;font-size:12px;margin-top:2px">A380 Captain Edition</div>
+                </div>
+                <div class="tag mono" id="flightCode">BDAY-001</div>
+            </div>
+
+            <div class="passBody">
+                <div class="grid">
+                    <div class="field passenger">
+                        <div class="label">Passenger</div>
+                        <div class="pRow">
+                            <!-- put hadi.jpg next to index.html -->
+                            <img class="avatar" src="assets/hadi2.PNG" alt="Hadi" />
+                            <div>
+                                <div class="value">Captain <span id="name">[اسم أخوك]</span></div>
+                                <div class="pSub mono">Airbus A380</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Flight</div>
+                        <div class="value mono" id="flight">DXB → SKY</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">From</div>
+                        <div class="value">Past Year</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">To</div>
+                        <div class="value">New Adventures</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Gate</div>
+                        <div class="value">Dreams ✨</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Seat</div>
+                        <div class="value">CAPTAIN 🧑‍✈️</div>
+                    </div>
+                </div>
+
+                <div class="divider">
+                    <div class="notchL"></div>
+                    <div class="notchR"></div>
+                </div>
+
+                <div class="footerRow">
+                    <div style="flex:1; display:grid; gap:10px;">
+                        <div class="field" style="background:transparent">
+                            <div class="label">Boarding Time</div>
+                            <div class="value mono" id="time">Now</div>
+                        </div>
+
+                        <div class="statusRow">
+                            <div class="seatbelt" id="seatbelt" title="Seatbelt">
+                                <span class="sbDot"></span>
+                                <span class="sbText">SEATBELT</span>
+                            </div>
+                            <button class="cta" id="startBtn">✈️ Start New Flight</button>
+                        </div>
+                    </div>
+
+                    <div class="qr" aria-label="QR">
+                        <div class="qrTop">
+                            <div class="qrMini mono" id="qrMini">BDAY-2006</div>
+                            <div class="qrBadge">A380</div>
+                        </div>
+                        <div class="qrGrid"></div>
+                        <div class="qrBottom">
+                            <div class="qrSmall">DOB: 01 JAN 2006</div>
+                            <div class="qrSmall">Gate: Dreams</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT: ATC panel -->
+    <div class="card panel">
+        <h2>🎧 ATC Channel</h2>
+        <p class="hint" id="hint">
+            اضغط <b>Start New Flight</b> لتفعيل الإقلاع (صوت + طيارة + احتفال).
+        </p>
+
+        <div class="atcBox">
+            <div class="scanline"></div>
+            <div class="blip" id="blip"></div>
+
+            <div class="atcTitle">
+                <span class="badge">CLEARANCE</span>
+                <span style="opacity:.95">Tower → Captain</span>
+            </div>
+
+            <div id="typed">جاهز للإقلاع؟ ✈️</div>
+            <div class="subtle" id="sub">Tip: جرّب اضغط DEBUG MODE 😉</div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // ====== Personalize here (edit these) ======
+        const CAPTAIN_NAME = "Hadi";
+        const FLIGHT_CODE = "BDAY-2006";
+        const ROUTE = "DAM → ALTITUDE 20";
+        const hint = document.getElementById("hint");
+        // ==========================================
+
+        // Set values
+        const qrMini = document.getElementById("qrMini");
+        if (qrMini) qrMini.textContent = FLIGHT_CODE;
+
+        document.getElementById("name").textContent = CAPTAIN_NAME;
+        document.getElementById("flightCode").textContent = FLIGHT_CODE;
+        document.getElementById("flight").textContent = ROUTE;
+
+        // Time label
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, "0");
+        const mm = String(now.getMinutes()).padStart(2, "0");
+        document.getElementById("time").textContent = `${hh}:${mm}`;
+
+        const toast = document.getElementById("toast");
+        setTimeout(() => toast.classList.add("show"), 450);
+        setTimeout(() => toast.classList.remove("show"), 3200);
+
+        // --- WebAudio ATC beeps (no external files) ---
+        let audioCtx;
+
+        function beep(freq = 880, duration = 0.08, type = "sine", gain = 0.03) {
+            audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.type = type;
+            o.frequency.value = freq;
+            g.gain.value = gain;
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            o.start();
+            o.stop(audioCtx.currentTime + duration);
+        }
+
+        function radioChatter() {
+            beep(980, 0.06, "square", 0.02);
+            setTimeout(() => beep(740, 0.07, "square", 0.02), 90);
+            setTimeout(() => beep(1100, 0.05, "square", 0.018), 190);
+            setTimeout(() => beep(660, 0.08, "square", 0.018), 270);
+        }
+
+        function ensureAudio() {
+            audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === "suspended") audioCtx.resume();
+        }
+
+        // Flyby engine sound (WebAudio) — no external files
+        function airplaneFlybySound(totalMs = 2600) {
+            ensureAudio();
+
+            const t0 = audioCtx.currentTime;
+            const dur = totalMs / 1000;
+
+            // Engine oscillator
+            const osc = audioCtx.createOscillator();
+            osc.type = "sawtooth";
+
+            // Low rumble layer
+            const rumble = audioCtx.createOscillator();
+            rumble.type = "sine";
+            rumble.frequency.setValueAtTime(45, t0);
+            rumble.frequency.exponentialRampToValueAtTime(60, t0 + dur * 0.5);
+            rumble.frequency.exponentialRampToValueAtTime(40, t0 + dur);
+
+            const gRumble = audioCtx.createGain();
+            gRumble.gain.setValueAtTime(0.0001, t0);
+            gRumble.gain.exponentialRampToValueAtTime(0.05, t0 + 0.25);
+            gRumble.gain.exponentialRampToValueAtTime(0.07, t0 + dur * 0.5);
+            gRumble.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+            osc.frequency.setValueAtTime(90, t0);
+            osc.frequency.exponentialRampToValueAtTime(140, t0 + dur * 0.45);
+            osc.frequency.exponentialRampToValueAtTime(80, t0 + dur);
+
+            // Noise (wind)
+            const bufferSize = Math.floor(audioCtx.sampleRate * dur);
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.6;
+
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = noiseBuffer;
+
+            // Filters
+            const engineLP = audioCtx.createBiquadFilter();
+            engineLP.type = "lowpass";
+            engineLP.frequency.setValueAtTime(900, t0);
+            engineLP.frequency.exponentialRampToValueAtTime(1400, t0 + dur * 0.5);
+            engineLP.frequency.exponentialRampToValueAtTime(700, t0 + dur);
+
+            const noiseBP = audioCtx.createBiquadFilter();
+            noiseBP.type = "bandpass";
+            noiseBP.frequency.setValueAtTime(900, t0);
+            noiseBP.Q.value = 0.8;
+
+            // Gain envelopes
+            const gEngine = audioCtx.createGain();
+            gEngine.gain.setValueAtTime(0.0001, t0);
+            gEngine.gain.exponentialRampToValueAtTime(0.12, t0 + 0.25);
+            gEngine.gain.exponentialRampToValueAtTime(0.18, t0 + dur * 0.5);
+            gEngine.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+            const gNoise = audioCtx.createGain();
+            gNoise.gain.setValueAtTime(0.0001, t0);
+            gNoise.gain.exponentialRampToValueAtTime(0.06, t0 + 0.2);
+            gNoise.gain.exponentialRampToValueAtTime(0.10, t0 + dur * 0.55);
+            gNoise.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+            // Stereo movement (left -> right)
+            const pan = audioCtx.createStereoPanner();
+            pan.pan.setValueAtTime(-0.8, t0);
+            pan.pan.linearRampToValueAtTime(0.8, t0 + dur);
+
+            // Wire up
+            osc.connect(engineLP).connect(gEngine).connect(pan).connect(audioCtx.destination);
+            noise.connect(noiseBP).connect(gNoise).connect(pan);
+            rumble.connect(gRumble).connect(pan);
+
+            osc.start(t0);
+            noise.start(t0);
+            rumble.start(t0);
+
+            osc.stop(t0 + dur);
+            noise.stop(t0 + dur);
+            rumble.stop(t0 + dur);
+        }
+
+        // --- Typing effect ---
+        const typed = document.getElementById("typed");
+        let typing = false;
+
+        function typeText(text, speed = 16) {
+            typing = true;
+            typed.textContent = "";
+            let i = 0;
+            const timer = setInterval(() => {
+                typed.textContent += text[i++] || "";
+                if (i >= text.length) {
+                    clearInterval(timer);
+                    typing = false;
+                }
+            }, speed);
+        }
+
+        // --- Confetti (simple particles on canvas) ---
+        const canvas = document.getElementById("confetti");
+        const ctx = canvas.getContext("2d");
+
+        function resizeSafe() {
+            canvas.width = window.innerWidth * devicePixelRatio;
+            canvas.height = window.innerHeight * devicePixelRatio;
+            ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+
+        window.addEventListener("resize", resizeSafe);
+        resizeSafe();
+
+        let confetti = [];
+        let confettiAnimating = false;
+
+        function burstConfetti() {
+            confetti = [];
+            const count = 150;
+            for (let i = 0; i < count; i++) {
+                confetti.push({
+                    x: Math.random() * window.innerWidth,
+                    y: -20 - Math.random() * 200,
+                    r: 3 + Math.random() * 5,
+                    vx: -2 + Math.random() * 4,
+                    vy: 3 + Math.random() * 6,
+                    a: Math.random() * Math.PI * 2,
+                    va: -0.1 + Math.random() * 0.2,
+                    life: 0,
+                    max: 150 + Math.random() * 70
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            if (confettiAnimating) return;
+            confettiAnimating = true;
+
+            function frame() {
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+                confetti.forEach(p => {
+                    p.life++;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.a += p.va;
+                    p.vy += 0.02;
+
+                    const hue = (p.x / window.innerWidth) * 360;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.a);
+                    ctx.fillStyle = `hsla(${hue}, 90%, 60%, 0.9)`;
+                    ctx.fillRect(-p.r, -p.r, p.r * 2.2, p.r * 1.2);
+                    ctx.restore();
+                });
+
+                confetti = confetti.filter(p => p.life < p.max && p.y < window.innerHeight + 40);
+
+                if (confetti.length) requestAnimationFrame(frame);
+                else {
+                    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    confettiAnimating = false;
+                }
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        // --- Plane animation trigger ---
+        const plane = document.getElementById("plane");
+
+        function flyPlane() {
+            plane.classList.remove("fly");
+            void plane.offsetWidth;
+            plane.style.top = (62 + Math.random() * 10) + "vh";
+            plane.classList.add("fly");
+        }
+
+        // --- Main action ---
+        const startBtn = document.getElementById("startBtn");
+        const seatbelt = document.getElementById("seatbelt");
+        const blip = document.getElementById("blip");
+        let launched = false;
+
+        startBtn.addEventListener("click", () => {
+            if (launched) return;
+            launched = true;
+
+            if (hint) hint.style.display = "none";
+            if (seatbelt) seatbelt.classList.add("on");
+
+            startBtn.textContent = "✅ Cleared for Takeoff";
+            startBtn.style.opacity = "0.95";
+
+            if (blip) {
+                blip.classList.remove("on");
+                void blip.offsetWidth;
+                blip.classList.add("on");
+            }
+
+            radioChatter();
+            airplaneFlybySound();
+            flyPlane();
+            burstConfetti();
+
+            const msg =
+                `ATC: Captain ${CAPTAIN_NAME}
+CLEARANCE GRANTED ✅
+
+Aircraft: Airbus A380
+Runway: 20
+Throttle: Set
+Rotation: V1 → VR → V2 ✈️
+
+Altitude: Unlimited
+Weather: Clear skies ☀️
+Fuel: Passion & Discipline
+Destination: Success & Happiness 🌍
+
+كل عام وإنت بألف خير يا كابتن ❤️
+إن شاء الله كل هبوطك ناعم،
+وكل أحلامك توصلها… رحلة بعد رحلة.`;
+
+            typeText(msg, 14);
+
+            setTimeout(() => beep(1200, 0.06, "sine", 0.02), 1200);
+
+            setTimeout(() => {
+                const reset = document.createElement("button");
+                reset.className = "cta";
+                reset.textContent = "🔁 Replay Flight";
+                reset.style.marginTop = "10px";
+                reset.onclick = () => location.reload();
+                startBtn.parentElement.appendChild(reset);
+            }, 2600);
+        });
+
+        // Easter egg
+        const debugBtn = document.getElementById("debugBtn");
+        debugBtn.addEventListener("click", () => {
+            radioChatter();
+            if (!typing) {
+                typeText(
+                    `// DEBUG MODE ✅
+if (Captain.smiles) {
+  Tower.reply("A380 skies are yours 😄");
+}
+
+ملاحظة سرّية:
+أنت مش بس كابتن…
+أنت مصدر الفخر بالعيلة كلها 🧑‍✈️❤️`, 16);
+            }
+        });
+    </script>
+</body>
+
+</html>
